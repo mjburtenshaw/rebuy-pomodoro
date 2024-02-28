@@ -1,0 +1,23 @@
+{
+  "author": {
+    "email": "mjburtenshaw@gmail.com",
+    "name": "Malcolm Burtenshaw",
+    "url": "https://github.com/mjburtenshaw"
+  },
+  "description": "A web-based Pomodoro timer.",
+  "devDependencies": {
+    "prettier": "3.2.5"
+  },
+  "name": "rebuy-pomodoro",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "directory": ".git",
+    "url": "https://github.com/mjburtenshaw/rebuy-pomodoro"
+  },
+  "scripts": {
+    "dev": "cd client && npm run dev",
+    "format": "npx prettier --config=.prettier/.prettier.config.json . --write"
+  },
+  "version": "0.0.0"
+}
