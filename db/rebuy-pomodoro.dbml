@@ -3,35 +3,35 @@ Project rebuy_pomodoro {
   Note: 'Persists data for the rebuy-pomodoro application.'
 }
 
-TableGroup sessions {
-  session_log
-  session_type
+TableGroup timers {
+  timer_log
+  timer_type
   sound_type
 }
 
-Table session_log {
+Table timer_log {
   end_time timestamptz [not null]
   id uuid [pk]
-  session_type_id uuid [ref: > session_type.id, not null]
+  timer_type_id uuid [ref: > timer_type.id, not null]
   sound_type_id uuid [ref: > sound_type.id, not null]
   start_time timestamptz [not null]
   task_id uuid [ref: > task.id]
 
   indexes {
-    session_type_id
+    timer_type_id
     sound_type_id
     task_id
   }
 
-  Note: 'Used to log session type and occurence.'
+  Note: 'Used to log timer type and occurence.'
 }
 
-Table session_type {
+Table timer_type {
   id uuid [pk]
   label text [not null]
   duration int [not null]
 
-  Note: 'Used to configure types of sessions.'
+  Note: 'Used to configure types of timers.'
 }
 
 Table sound_type {
@@ -43,7 +43,7 @@ Table sound_type {
     storage_object_id
   }
 
-  Note: 'Used to configure sounds for sessions.'
+  Note: 'Used to configure sounds for timers.'
 }
 
 Table task {
