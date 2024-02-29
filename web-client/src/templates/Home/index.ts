@@ -1,1 +1,1 @@
-export * from "./Page.template";
+export * from './Page.template';
