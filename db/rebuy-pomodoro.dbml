@@ -5,6 +5,7 @@ Project rebuy_pomodoro {
 
 TableGroup timer {
   timer
+  timer_log
   timer_type
   sound_type
 }
@@ -22,6 +23,12 @@ Table timer {
   }
 
   Note: 'Used to log timer type and occurence.'
+}
+
+Table timer_log {
+  id uuid [pk]
+  timer_id uuid [ref: > timer.id, not null]
+  event_type text [not null]
 }
 
 Table timer_type {
