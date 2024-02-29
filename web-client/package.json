@@ -25,9 +25,9 @@
     "dev": "vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "postinstall": "npm link rebuy-pomodoro-ui",
-    "preinstall": "cd ../ui && npm link && cd ../client",
+    "preinstall": "cd ../ui && npm link && cd ../web-client",
     "preview": "vite preview"
   },
   "type": "module",
-  "version": "0.1.1"
+  "version": "0.1.2"
 }

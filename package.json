@@ -20,8 +20,8 @@
     "url": "https://github.com/mjburtenshaw/rebuy-pomodoro"
   },
   "scripts": {
-    "dev": "cd client && npm i && npm run dev",
+    "dev": "cd web-client && npm i && npm run dev",
     "format": "npx prettier --config=.prettier/.prettier.config.json . --write"
   },
-  "version": "0.0.1"
+  "version": "0.0.2"
 }
