@@ -4,7 +4,7 @@ A web-based Pomodoro timer.
 
 Skip to [Usage](#usage) to get going.
 
-![Static Badge](https://img.shields.io/badge/version-1.0.0-aa3288?labelColor=3754d5)
+![Static Badge](https://img.shields.io/badge/version-1.1.0-aa3288?labelColor=3754d5)
 
 ## Table of Contents
 
@@ -45,7 +45,7 @@ Skip to [Usage](#usage) to get going.
 2. Run the setup script:
 
 ```shell
-./scripts/setup.sh
+npm run setup
 ```
 
 3. Change environment variables as desired in the newly created `db/.env` file.
