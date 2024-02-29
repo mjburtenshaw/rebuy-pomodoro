@@ -18,7 +18,6 @@ Table timer_log {
 
   indexes {
     timer_type_id
-    sound_type_id
     task_id
   }
 
@@ -41,6 +40,7 @@ Table sound_type {
 
   indexes {
     storage_object_id
+    sound_type_id
   }
 
   Note: 'Used to configure sounds for timers.'
