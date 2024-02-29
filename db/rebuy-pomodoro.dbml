@@ -3,13 +3,13 @@ Project rebuy_pomodoro {
   Note: 'Persists data for the rebuy-pomodoro application.'
 }
 
-TableGroup timers {
-  timer_log
+TableGroup timer {
+  timer
   timer_type
   sound_type
 }
 
-Table timer_log {
+Table timer {
   end_time timestamptz [not null]
   id uuid [pk]
   timer_type_id uuid [ref: > timer_type.id, not null]
