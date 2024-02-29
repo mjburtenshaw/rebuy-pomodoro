@@ -1,0 +1,69 @@
+Project rebuy_pomodoro {
+  database_type: 'PostgreSQL'
+  Note: 'Persists data for the rebuy-pomodoro application.'
+}
+
+TableGroup sessions {
+  session_log
+  session_type
+  sound_type
+}
+
+Table session_log {
+  end_time timestamptz [not null]
+  id uuid [pk]
+  session_type_id uuid [ref: > session_type.id, not null]
+  sound_type_id uuid [ref: > sound_type.id, not null]
+  start_time timestamptz [not null]
+  task_id uuid [ref: > task.id]
+
+  indexes {
+    session_type_id
+    sound_type_id
+    task_id
+  }
+
+  Note: 'Used to log session type and occurence.'
+}
+
+Table session_type {
+  id uuid [pk]
+  label text [not null]
+  duration int [not null]
+
+  Note: 'Used to configure types of sessions.'
+}
+
+Table sound_type {
+  id uuid [pk]
+  label text [not null]
+  storage_object_id uuid [ref: > storage_object.id, not null]
+
+  indexes {
+    storage_object_id
+  }
+
+  Note: 'Used to configure sounds for sessions.'
+}
+
+Table task {
+  description text
+  id uuid [pk]
+  is_done boolean
+
+  indexes {
+    is_done
+  }
+}
+
+Table storage_object {
+  id uuid [pk, note: 'Internal only. Do NOT expose this outside the API.']
+  reference_key uuid [not null, note: 'This is what we give to clients to reference this record. This allows us to rotate them in the event that a client has a breach.']
+  url text [not null]
+  mime_type text [not null, note: 'The MIME type of the file. If none is provided by the client, we assign one based on the format. If no format is provided, the default value is text/plain.']
+  size int [not null, note: 'The size of the file in KB']
+  name text [not null, note: 'The name of the file provided by the client. This is for their reference only.']
+  last_accessed_at timestamptz
+
+  Note: 'Used to store locations for objects uploaded to storage via API.'
+}
