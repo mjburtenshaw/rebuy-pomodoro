@@ -1,5 +1,5 @@
 import { App } from './App.tsx';
-import { AppContextProvider } from './contexts';
+import { AppContextProvider } from './contexts/index.ts';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
