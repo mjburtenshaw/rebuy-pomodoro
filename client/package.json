@@ -21,12 +21,13 @@
   },
   "name": "rebuy-pomodoro-client",
   "scripts": {
-    "dev": "vite",
     "build": "tsc && vite build",
+    "dev": "vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "postinstall": "npm link rebuy-pomodoro-ui",
+    "preinstall": "cd ../ui && npm link && cd ../client",
     "preview": "vite preview"
   },
   "type": "module",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
