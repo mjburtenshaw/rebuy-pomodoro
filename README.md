@@ -18,8 +18,8 @@ Skip to [Usage](#usage) to get going.
 
 ## People
 
-| Name | Role | Email |
-|------|------|-------|
+| Name               | Role   | Email                  |
+| ------------------ | ------ | ---------------------- |
 | Malcolm Burtenshaw | Author | mjburtenshaw@gmail.com |
 
 ## Policies

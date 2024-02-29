@@ -4,10 +4,14 @@
     "name": "Malcolm Burtenshaw",
     "url": "https://github.com/mjburtenshaw"
   },
+  "bugs": {
+    "url": "https://github.com/mjburtenshaw/rebuy-pomodoro/issues"
+  },
   "description": "A web-based Pomodoro timer.",
   "devDependencies": {
     "prettier": "3.2.5"
   },
+  "homepage": "https://github.com/mjburtenshaw/rebuy-pomodoro#readme",
   "name": "rebuy-pomodoro",
   "license": "MIT",
   "repository": {

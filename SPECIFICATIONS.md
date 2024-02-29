@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Pomodoro Technique is a popular time management method for boosting productivity and focus.  Build a web-based Pomodoro timer application to help users implement this technique. Spend as much time or as little as you need to prepare the following. 
+The Pomodoro Technique is a popular time management method for boosting productivity and focus. Build a web-based Pomodoro timer application to help users implement this technique. Spend as much time or as little as you need to prepare the following.
 
 ## Core Features
 
