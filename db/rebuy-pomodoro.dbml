@@ -27,8 +27,8 @@ Table timer {
 
 Table timer_log {
   id uuid [pk]
-  timer_id uuid [ref: > timer.id, not null]
   event_type text [not null]
+  timer_id uuid [ref: > timer.id, not null]
 }
 
 Table timer_type {
@@ -57,6 +57,7 @@ Table task {
   description text
   id uuid [pk]
   is_done boolean
+  title text [not null]
 
   indexes {
     is_done
