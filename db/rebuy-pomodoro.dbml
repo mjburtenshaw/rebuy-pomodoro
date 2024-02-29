@@ -35,6 +35,11 @@ Table timer_type {
   id uuid [pk]
   label text [not null]
   duration int [not null]
+  sound_type_id uuid [ref: > sound_type.id, not null]
+
+  indexes {
+    sound_type_id
+  }
 
   Note: 'Used to configure types of timers.'
 }
@@ -43,11 +48,9 @@ Table sound_type {
   id uuid [pk]
   label text [not null]
   storage_object_id uuid [ref: > storage_object.id, not null]
-  sound_type_id uuid [ref: > sound_type.id, not null]
 
   indexes {
     storage_object_id
-    sound_type_id
   }
 
   Note: 'Used to configure sounds for timers.'
