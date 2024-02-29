@@ -73,7 +73,9 @@ One advantage of this is that each layer isn't restricted by the technologies us
 This architecture is designed to optimize for the business and the user's ease-of-use first, then operators, then developers.
 
 user > ops > dev
+
 biz > ops > dev
+
 biz ≹ user
 
 More on that philosophy in [_Code is run more than read_](https://olano.dev/2023-11-30-code-is-run-more-than-read/) by Facundo Olano.
