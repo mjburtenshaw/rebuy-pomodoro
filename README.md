@@ -4,7 +4,7 @@ A web-based Pomodoro timer.
 
 Skip to [Usage](#usage) to get going.
 
-![Static Badge](https://img.shields.io/badge/version-2.0.0-aa3288?labelColor=3754d5)
+![Static Badge](https://img.shields.io/badge/version-2.0.1-aa3288?labelColor=3754d5)
 
 ## Table of Contents
 
@@ -27,9 +27,8 @@ Skip to [Usage](#usage) to get going.
 
 ### Documentation
 
-- Update appropriate **DOCFILES**, e.g., `README` or `TECHNOLOGIES`, if changelogs modify how developers can interact with the application, such as modifying scripts. In all such cases, also update the version symbols in this document, [`package.json`](package.json), and [`package-lock.json`](package-lock.json).
-- Update the `version` property in [`client/package.json`](client/package.json) and [`client/package-lock.json`](client/package-lock.json) when modifying how users can interact with the client.
-- All **DOCFILES** should be referenced in this document to improve discoverability.
+- Update appropriate **DOCFILES**, e.g., `README` or `TECHNOLOGIES`, if changelogs modify how developers can interact with the application
+- Update the version symbols in READMEs, corresponding `package.json`, and `package-lock.json` files if the user interface changes for each application layer, respective to who the intended users are.
 
 ### Version Control
 
