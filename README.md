@@ -4,7 +4,7 @@ A web-based Pomodoro timer.
 
 Skip to [Usage](#usage) to get going.
 
-![Static Badge](https://img.shields.io/badge/version-0.0.3-aa3288?labelColor=3754d5)
+![Static Badge](https://img.shields.io/badge/version-1.0.0-aa3288?labelColor=3754d5)
 
 ## Table of Contents
 
@@ -39,15 +39,27 @@ Skip to [Usage](#usage) to get going.
 
 ## Procedures
 
+### Setup
+
+1. Verify you have a Docker engine installed on your machine such as [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+2. Run the setup script:
+
+```shell
+./scripts/setup.sh
+```
+
+3. Change environment variables as desired in the newly created `db/.env` file.
+
 ### Usage
 
-1. In a shell, start the application client:
+1. Verify you have performed [setup](#setup).
+2. In a shell, start the backend services and web client:
 
 ```shell
 npm run dev
 ```
 
-2. In a web browser, navigate to the URL printed in the terminal to visit the client.
+3. In a web browser, navigate to the URL printed in the terminal to visit the client.
 
 ## Platforms
 

@@ -1,0 +1,17 @@
+version: "3"
+services:
+  db:
+    container_name: db
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./db/.env
+    volumes:
+      - ../db:/usr/src/app:cached
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
