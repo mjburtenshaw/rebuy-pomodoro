@@ -10,8 +10,21 @@ services:
     env_file:
       - ./db/.env
     volumes:
-      - ../db:/usr/src/app:cached
+      - ./db:/usr/src/app:cached
       - db:/var/lib/postgresql/data
-
+  api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./api/.env
+    depends_on:
+      - db
+    volumes:
+      - ./api:/usr/src/app:cached
+      - /usr/src/app/node_modules
 volumes:
   db:
