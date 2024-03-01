@@ -35,8 +35,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      sequelize,
       modelName: 'timerLog',
+      sequelize,
+      tableName: 'timer_log',
       underscored: true,
     },
   );

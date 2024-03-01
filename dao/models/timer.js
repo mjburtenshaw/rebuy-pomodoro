@@ -42,8 +42,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      sequelize,
       modelName: 'timer',
+      tableName: 'timer',
+      sequelize,
       underscored: true,
     },
   );

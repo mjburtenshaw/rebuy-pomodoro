@@ -58,8 +58,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      sequelize,
       modelName: 'storageObject',
+      sequelize,
+      tableName: 'storage_object',
       underscored: true,
     },
   );

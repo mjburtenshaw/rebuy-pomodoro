@@ -39,10 +39,11 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      sequelize,
-      modelName: 'timerType',
-      underscored: true,
       comment: 'Used to configure types of timers.',
+      modelName: 'timerType',
+      sequelize,
+      tableName: 'timer_type',
+      underscored: true,
     },
   );
   return TimerType;

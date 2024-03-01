@@ -35,8 +35,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      sequelize,
       modelName: 'soundType',
+      sequelize,
+      tableName: 'sound_type',
       underscored: true,
     },
   );
