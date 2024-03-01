@@ -8,16 +8,31 @@ const DEFAULT_STORAGE_OBJECT_ID = 'f5fe4967-0040-4605-af02-66ceab56bbe0';
 module.exports = {
   async up(queryInterface, Sequelize) {
     const currentTimestamp = new Date();
-    return queryInterface.bulkInsert(TABLE_NAME, [
+
+    // Check if the record already exists
+    const existingRecord = await queryInterface.rawSelect(
+      TABLE_NAME,
       {
-        id: DEFAULT_SOUND_TYPE_ID,
-        label: 'chime',
-        storage_object_id: DEFAULT_STORAGE_OBJECT_ID,
-        version: '1',
-        created_at: currentTimestamp,
-        updated_at: currentTimestamp,
+        where: {
+          id: DEFAULT_SOUND_TYPE_ID,
+        },
       },
-    ]);
+      ['id'],
+    );
+
+    // If the record doesn't exist, insert it
+    if (!existingRecord) {
+      return queryInterface.bulkInsert(TABLE_NAME, [
+        {
+          id: DEFAULT_SOUND_TYPE_ID,
+          label: 'chime',
+          storage_object_id: DEFAULT_STORAGE_OBJECT_ID,
+          version: '1',
+          created_at: currentTimestamp,
+          updated_at: currentTimestamp,
+        },
+      ]);
+    }
   },
 
   async down(queryInterface, Sequelize) {

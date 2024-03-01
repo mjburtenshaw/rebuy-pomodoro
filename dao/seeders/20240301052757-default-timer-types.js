@@ -13,39 +13,36 @@ const RECORD_IDS = [
 module.exports = {
   async up(queryInterface, Sequelize) {
     const currentTimestamp = new Date();
-    return queryInterface.bulkInsert(
-      TABLE_NAME,
-      [
-        {
-          created_at: currentTimestamp,
-          id: RECORD_IDS[0],
-          label: 'pomodoro',
-          duration: 40 * MINUTES,
-          sound_type_id: DEFAULT_SOUND_TYPE_ID,
-          updated_at: currentTimestamp,
-          version: '1',
-        },
-        {
-          created_at: currentTimestamp,
-          id: RECORD_IDS[1],
-          label: 'short_break',
-          duration: 5 * MINUTES,
-          sound_type_id: DEFAULT_SOUND_TYPE_ID,
-          updated_at: currentTimestamp,
-          version: '1',
-        },
-        {
-          created_at: currentTimestamp,
-          id: RECORD_IDS[2],
-          label: 'long_break',
-          duration: 20 * MINUTES,
-          sound_type_id: DEFAULT_SOUND_TYPE_ID,
-          updated_at: currentTimestamp,
-          version: '1',
-        },
-      ],
-      {},
+
+    // Check for existing records
+    const existingRecords = await queryInterface.sequelize.query(
+      `SELECT id FROM ${TABLE_NAME} WHERE id IN (:recordIds)`,
+      {
+        replacements: { recordIds: RECORD_IDS },
+        type: Sequelize.QueryTypes.SELECT,
+      },
     );
+
+    const existingIds = existingRecords.map((record) => record.id);
+
+    // Filter out records that already exist
+    const recordsToInsert = [
+      {
+        created_at: currentTimestamp,
+        id: RECORD_IDS[0],
+        label: 'pomodoro',
+        duration: 40 * MINUTES,
+        sound_type_id: DEFAULT_SOUND_TYPE_ID,
+        updated_at: currentTimestamp,
+        version: '1',
+      },
+      // ... other records
+    ].filter((record) => !existingIds.includes(record.id));
+
+    // Insert records if any
+    if (recordsToInsert.length > 0) {
+      return queryInterface.bulkInsert(TABLE_NAME, recordsToInsert, {});
+    }
   },
 
   async down(queryInterface, Sequelize) {
