@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.1"
+  },
+  "description": "The DAO for the rebuy-pomodoro-db.",
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
+  },
+  "name": "rebuy-pomodoro-dao",
+  "scripts": {
+    "dev": "node --watch --watch-preserve-output --inspect=0.0.0.0:9229 index.js"
+  },
+  "version": "0.0.0"
+}

@@ -1,4 +1,5 @@
 {
   "prettier.configPath": ".prettier/.prettier.config.json",
-  "prettier.ignorePath": ".prettier/.prettierignore"
+  "prettier.ignorePath": ".prettier/.prettierignore",
+  "cSpell.words": ["pomo"]
 }

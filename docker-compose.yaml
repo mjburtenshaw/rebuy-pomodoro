@@ -8,10 +8,24 @@ services:
     ports:
       - "5432:5432"
     env_file:
-      - ./db/.env
+      - ./.rebuy-pomodoro.db.env
     volumes:
       - ./db:/usr/src/app:cached
       - db:/var/lib/postgresql/data
+  dao:
+    container_name: dao
+    build:
+      context: ./dao
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    env_file:
+      - ./.rebuy-pomodoro.db.env
+    depends_on:
+      - db
+    volumes:
+      - ./dao:/usr/src/app:cached
+      - /usr/src/app/node_modules
   api:
     container_name: api
     build:
@@ -23,6 +37,7 @@ services:
       - ./api/.env
     depends_on:
       - db
+      - dao
     volumes:
       - ./api:/usr/src/app:cached
       - /usr/src/app/node_modules
