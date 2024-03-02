@@ -41,5 +41,21 @@ services:
     volumes:
       - ./api:/usr/src/app:cached
       - /usr/src/app/node_modules
+  web-client:
+    container_name: web-client
+    build:
+      context: .
+      dockerfile: web-client/Dockerfile
+    ports:
+      - "5173:5173"
+    env_file:
+      - ./web-client/.env
+    depends_on:
+      - db
+      - dao
+      - api
+    volumes:
+      - ./web-client:/usr/src/app:cached
+      - /usr/src/app/node_modules
 volumes:
   db:

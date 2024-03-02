@@ -4,7 +4,7 @@ A web-based Pomodoro timer.
 
 Skip to [Usage](#usage) to get going.
 
-![Static Badge](https://img.shields.io/badge/version-2.0.2-aa3288?labelColor=3754d5)
+![Static Badge](https://img.shields.io/badge/version-2.0.3-aa3288?labelColor=3754d5)
 
 ## Table of Contents
 
