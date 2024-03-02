@@ -17,11 +17,6 @@ export const sharedThemeOptions: ThemeOptions = {
   },
   typography: {
     fontFamily: FONTS.SOFIA_SANS,
-    h2: {
-      color: 'white',
-      fontSize: '2.5vw',
-      fontWeight: 500,
-    },
   },
 };
 

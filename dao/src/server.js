@@ -19,6 +19,7 @@ async function startDao() {
   await db.sequelize.authenticate();
 
   server.use(dao.timer.v1.router);
+  server.use(dao.timerType.v1.router);
 
   const httpServer = server.listen(DAO_PORT, () => {
     const url = `http://localhost:${DAO_PORT}`;

@@ -1,4 +1,5 @@
 import { timerService } from './api.timer.service';
+import { timerTypeService } from './api.timerType.service';
 
 const baseUrls: Record<string, string> = {
   local: 'http://localhost:8080',
@@ -7,6 +8,7 @@ const baseUrls: Record<string, string> = {
 class ApiService {
   private _baseUrl: string | null = null;
   public timer = timerService;
+  public timerType = timerTypeService;
 
   constructor() {
     const { VITE_ENV } = import.meta.env;
@@ -22,6 +24,7 @@ class ApiService {
     }
 
     this.timer.init(this._baseUrl);
+    this.timerType.init(this._baseUrl);
 
     console.log('⭐️ API service is ready');
   }

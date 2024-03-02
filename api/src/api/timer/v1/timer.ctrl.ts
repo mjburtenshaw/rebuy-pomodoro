@@ -1,10 +1,10 @@
-import status from 'http-status';
-import express from 'express';
 import { logUtil } from '../../../utils/log';
 import { services } from '../../../services';
+import express from 'express';
+import status from 'http-status';
 
 const list: express.Handler = async (_, res) => {
-  const ctx = new logUtil.Context('pingController', {
+  const ctx = new logUtil.Context('timerController', {
     parentCtx: res.locals.ctx,
   });
   try {

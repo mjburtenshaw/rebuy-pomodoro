@@ -36,7 +36,24 @@ module.exports = {
         updated_at: currentTimestamp,
         version: '1',
       },
-      // ... other records
+      {
+        created_at: currentTimestamp,
+        id: RECORD_IDS[1],
+        label: 'long_break',
+        duration: 20 * MINUTES,
+        sound_type_id: DEFAULT_SOUND_TYPE_ID,
+        updated_at: currentTimestamp,
+        version: '1',
+      },
+      {
+        created_at: currentTimestamp,
+        id: RECORD_IDS[2],
+        label: 'short_break',
+        duration: 5 * MINUTES,
+        sound_type_id: DEFAULT_SOUND_TYPE_ID,
+        updated_at: currentTimestamp,
+        version: '1',
+      },
     ].filter((record) => !existingIds.includes(record.id));
 
     // Insert records if any
