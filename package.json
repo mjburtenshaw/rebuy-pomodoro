@@ -20,9 +20,9 @@
     "url": "https://github.com/mjburtenshaw/rebuy-pomodoro"
   },
   "scripts": {
-    "dev": "docker compose up --detach && cd web-client && npm i && npm run dev",
+    "dev": "docker compose up --build",
     "format": "npx prettier --config=.prettier/.prettier.config.json --ignore-path=.gitignore --ignore-path=.prettier/.prettierignore . --write",
     "setup": "./scripts/setup.sh"
   },
-  "version": "2.0.3"
+  "version": "2.1.0"
 }

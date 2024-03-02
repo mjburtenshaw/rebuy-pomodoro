@@ -55,7 +55,7 @@ services:
       - dao
       - api
     volumes:
-      - ./web-client:/usr/src/app:cached
+      - ./web-client:/usr/src/web-client:cached
       - /usr/src/app/node_modules
 volumes:
   db:
