@@ -15,7 +15,7 @@ const rootRoute = createRootRoute();
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: ROUTES.INDEX,
-  component: Pages.HomePage,
+  component: Pages.TimerPage,
 });
 
 const splatRoute = createRoute({

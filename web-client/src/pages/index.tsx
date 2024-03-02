@@ -1,8 +1,13 @@
-import { HomePage } from './Home.page';
+import { TimerContextProvider } from '../contexts/TimerContext';
+import { TimerPage } from './Timer.page';
 import { SplatPage } from './Splat.page';
 
 const Pages = {
-  HomePage,
+  TimerPage: () => (
+    <TimerContextProvider>
+      <TimerPage />
+    </TimerContextProvider>
+  ),
   SplatPage,
 };
 
