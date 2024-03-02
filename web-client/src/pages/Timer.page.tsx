@@ -11,6 +11,7 @@ export function TimerPage() {
     (async () => {
       await listTimers();
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const typographies: TypographyDataProps[] = [
