@@ -11,7 +11,7 @@ TableGroup timer {
 }
 
 Table timer {
-  end_time timestamptz [not null]
+  end_time timestamptz
   id uuid [pk]
   timer_type_id uuid [ref: > timer_type.id, not null]
   start_time timestamptz [not null]

@@ -11,7 +11,6 @@ module.exports = {
       },
       end_time: {
         type: Sequelize.DATE,
-        allowNull: false,
       },
       timer_type_id: {
         type: Sequelize.UUID,

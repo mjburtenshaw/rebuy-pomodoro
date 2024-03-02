@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       endTime: {
         type: DataTypes.DATE,
-        allowNull: false,
       },
       timerTypeId: {
         type: DataTypes.UUID,

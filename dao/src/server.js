@@ -28,7 +28,7 @@ async function startDao() {
   // Prevents local servers from hanging up when changes are detected.
   // See Also: [ts-node-dev fails to restarts after change](https://github.com/wclr/ts-node-dev/issues/318)
   process.on('SIGTERM', () => {
-    console.verbose('SIGTERM received, exiting.');
+    console.log('SIGTERM received, exiting.');
     process.exit(0);
   });
 

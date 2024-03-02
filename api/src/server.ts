@@ -3,6 +3,7 @@ import { logUtil } from './utils/log';
 import { serverMiddlewares } from './server-middlewares';
 import cors from 'cors';
 import express from 'express';
+import { services } from './services';
 
 function startApi() {
   const { PORT } = process.env;
@@ -23,6 +24,8 @@ function startApi() {
   api.use(express.json({ limit: REQUEST_SIZE_LIMIT }));
   api.use(express.urlencoded({ limit: REQUEST_SIZE_LIMIT, extended: false }));
   api.use(cors());
+
+  services.dao.init(ctx);
 
   serverMiddlewares.useRouters(api);
 
