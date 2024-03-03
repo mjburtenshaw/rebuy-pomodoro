@@ -43,6 +43,28 @@ async function create(req, res) {
   }
 }
 
-const controller = { create, list };
+async function updateOne(req, res) {
+  try {
+    const timerUpdates = {
+      end_time: req.body.endTime,
+    };
+    await db.timer.update(timerUpdates, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    await db.timerLog.create({
+      eventType: req.body.eventType,
+      timerId: req.params.id,
+      version: '1',
+    });
+    res.status(httpStatus.CREATED).json({ timer });
+  } catch (error) {
+    console.error('💣 creating timer failed', error);
+    res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
+
+const controller = { create, list, updateOne };
 
 module.exports = { controller };
