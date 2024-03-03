@@ -18,7 +18,7 @@ async function autoTerminate(timer, timerTypes) {
     await timer.save();
     await db.timerLog.create({
       eventType: 'auto_term',
-      timer_id: timer.id,
+      timerId: timer.id,
       version: '1',
     });
   }
