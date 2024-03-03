@@ -103,7 +103,7 @@ export function TimerContextProvider({ children }: TimerContextProviderProps) {
     setTimerTypeInEdit(null);
   }
 
-  hooks.useCountdowns(timers, timerTypes);
+  hooks.useCountdowns(timers, timerTypes, setTimers);
 
   return (
     <TimerContext.Provider

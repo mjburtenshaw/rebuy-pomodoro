@@ -5,7 +5,11 @@ import { useCallback, useEffect, useState } from 'react';
 
 type Timeouts = Record<string, NodeJS.Timeout>;
 
-export function useCountdowns(timers: Timer[], timerTypes: TimerType[]) {
+export function useCountdowns(
+  timers: Timer[],
+  timerTypes: TimerType[],
+  setTimers: (callback: (timers: Timer[]) => Timer[]) => void,
+) {
   const [countdowns, setCountdowns] = useState<Timeouts>({});
 
   const { call: callUpdateTimer } = useService(services.api.timer.updateOne, {
@@ -13,26 +17,28 @@ export function useCountdowns(timers: Timer[], timerTypes: TimerType[]) {
     failure: `Couldn't update timer. Please contact Support at ${SUPPORT_EMAIL}.`,
   });
 
-  const removeCountdown = useCallback((timerId: string) => {
-    const countdown = countdowns[timerId];
-    clearTimeout(countdown);
-
-    const nextCountdowns = Object.fromEntries(
-      Object.entries(countdowns).filter(([key]) => key !== timerId),
-    );
-
-    setCountdowns(nextCountdowns);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const removeAllCountdowns = useCallback(() => {
-    Object.values(countdowns).forEach((countdown) => {
+  const removeCountdown = useCallback(
+    (timerId: string) => {
+      const countdown = countdowns[timerId];
       clearTimeout(countdown);
-    });
 
-    setCountdowns({});
+      setCountdowns((prevCountdowns) => {
+        const nextCountdowns = Object.fromEntries(
+          Object.entries(prevCountdowns).filter(([key]) => key !== timerId),
+        );
+        return nextCountdowns;
+      });
+
+      setTimers((prevTimers: Timer[]) => {
+        const nextTimers = prevTimers
+          .slice()
+          .filter((prevTimer) => prevTimer.id !== timerId);
+        return nextTimers;
+      });
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    [countdowns, timers],
+  );
 
   const createCountdown = useCallback(
     (timer: Timer) => {
@@ -42,13 +48,16 @@ export function useCountdowns(timers: Timer[], timerTypes: TimerType[]) {
       if (!timerType) {
         return; // timerTypes might not be ready yet.
       }
+      if (countdowns[timer.id]) {
+        return; // There is already a timer.
+      }
 
       const capSeconds = timerType.duration / 1000;
       const initialSeconds = Math.floor(
         (Date.now() - Date.parse(timer.startTime)) / 1000,
       );
-
       const autoTerminateMs = (capSeconds - initialSeconds) * 1000;
+
       const countdown = setTimeout(() => {
         const sound = new Audio(
           '../../public/sound-types/dd1d6231-7587-4f67-aa7c-1f0df1b8182f.mp3',
@@ -58,27 +67,32 @@ export function useCountdowns(timers: Timer[], timerTypes: TimerType[]) {
         removeCountdown(timer.id);
       }, autoTerminateMs);
 
-      return countdown;
+      const nextCountdowns = Object.fromEntries(Object.entries(countdowns));
+      nextCountdowns[timer.id] = countdown;
+
+      setCountdowns((prevCountdowns) => {
+        const nextCountdowns = Object.fromEntries(
+          Object.entries(prevCountdowns),
+        );
+        nextCountdowns[timer.id] = countdown;
+        return nextCountdowns;
+      });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [timerTypes],
+    [countdowns, timers, timerTypes],
   );
 
   useEffect(() => {
-    const initialCountdowns = timers.reduce<Timeouts>(
-      (initialCountdowns, timer) => {
-        const countdown = createCountdown(timer);
-        if (countdown) {
-          initialCountdowns[timer.id] = countdown;
-        }
-        return initialCountdowns;
-      },
-      {},
-    );
+    const timerIds = timers.map((timer) => timer.id);
 
-    setCountdowns(initialCountdowns);
+    // cancel stale countdowns
+    Object.keys(countdowns).forEach((timerId) => {
+      if (!timerIds.includes(timerId)) {
+        removeCountdown(timerId);
+      }
+    });
 
-    return removeAllCountdowns;
+    timers.forEach(createCountdown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timers, timerTypes]);
+  }, [timers]);
 }
