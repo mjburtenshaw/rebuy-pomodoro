@@ -1,5 +1,6 @@
 import {
   ButtonGroup,
+  TextFieldGroup,
   TimerGroup,
   TypographyDataProps,
   TypographyGroup,
@@ -12,13 +13,17 @@ import { useContext, useEffect } from 'react';
 export function TimerPage() {
   const { handleThemeChange, theme } = useContext(AppContext);
   const {
+    changeTimerType,
     createTimer,
     isListingTimers,
     listTimers,
     listTimerTypes,
+    setTimerTypeInEdit,
     stopTimer,
     timers,
     timerTypes,
+    timerTypeInEdit,
+    updateTimerType,
   } = useContext(TimerContext);
 
   useEffect(() => {
@@ -97,7 +102,9 @@ export function TimerPage() {
                   progressLabelFormatter: (secondsRemaining: number) => {
                     const minutesRemaining = Math.floor(secondsRemaining / 60);
                     const onlySecondsRemaining = secondsRemaining % 60;
-                    return `${minutesRemaining}m${onlySecondsRemaining}s`;
+                    return minutesRemaining
+                      ? `${minutesRemaining}m${onlySecondsRemaining}s`
+                      : `${onlySecondsRemaining}s`;
                   },
                 },
               };
@@ -113,6 +120,39 @@ export function TimerPage() {
             onClick: () => createTimer(timerType.id),
           }))}
         />
+        <ButtonGroup
+          direction="column"
+          label="Edit a timer type:"
+          buttons={timerTypes.map((timerType) => ({
+            children: timerType.label.replace(/_/g, ' '),
+            variant:
+              timerTypeInEdit?.id === timerType.id
+                ? 'contained'
+                : ('outlined' as const),
+            onClick: () =>
+              setTimerTypeInEdit(
+                timerTypeInEdit?.id === timerType.id ? null : timerType,
+              ),
+          }))}
+        />
+        {timerTypeInEdit ? (
+          <>
+            <TextFieldGroup
+              textFields={[
+                {
+                  value: String(timerTypeInEdit.duration),
+                  handleChange: (event) =>
+                    changeTimerType('duration', event.target.value),
+                  label: 'Duration',
+                  helperText: 'How long the timer lasts in milliseconds',
+                },
+              ]}
+            />
+            <ButtonGroup
+              buttons={[{ children: 'SAVE', onClick: updateTimerType }]}
+            />
+          </>
+        ) : null}
       </Grid>
     </TimerTemplate.Page>
   );

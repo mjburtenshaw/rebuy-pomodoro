@@ -38,7 +38,7 @@ async function create(req, res) {
     });
     res.status(httpStatus.CREATED).json({ timer });
   } catch (error) {
-    console.error('💣 creating timer failed', error);
+    console.error('💣 creating Timer failed', error);
     res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
@@ -66,7 +66,7 @@ async function updateOne(req, res) {
 
     res.sendStatus(httpStatus.OK);
   } catch (error) {
-    console.error('💣 creating timer failed', error);
+    console.error('💣 updating Timer failed', error);
     res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }

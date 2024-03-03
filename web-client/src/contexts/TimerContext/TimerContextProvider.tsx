@@ -11,6 +11,9 @@ type TimerContextProviderProps = {
 export function TimerContextProvider({ children }: TimerContextProviderProps) {
   const [timers, setTimers] = useState<Timer[]>([]);
   const [timerTypes, setTimerTypes] = useState<TimerType[]>([]);
+  const [timerTypeInEdit, setTimerTypeInEdit] = useState<TimerType | null>(
+    null,
+  );
 
   const { call: callListTimers, isWaiting: isListingTimers } = hooks.useService(
     services.api.timer.list,
@@ -68,21 +71,58 @@ export function TimerContextProvider({ children }: TimerContextProviderProps) {
     await listTimers();
   }
 
+  function changeTimerType(key: string, value: string) {
+    if (!timerTypeInEdit) {
+      return;
+    }
+
+    const nextTimerTypeInEdit = Object.fromEntries(
+      Object.entries(timerTypeInEdit),
+    ) as TimerType;
+
+    if (key === 'duration') {
+      nextTimerTypeInEdit.duration = Number(value);
+    }
+    setTimerTypeInEdit(nextTimerTypeInEdit);
+  }
+
+  const { call: callUpdateTimerType, isWaiting: isUpdatingTimerType } =
+    hooks.useService(services.api.timerType.updateOne, {
+      success: 'Timer updated!',
+      failure: `Couldn't update timer. Please contact Support at ${SUPPORT_EMAIL}.`,
+    });
+
+  async function updateTimerType() {
+    if (!timerTypeInEdit) {
+      return;
+    }
+
+    await callUpdateTimerType(timerTypeInEdit);
+    await listTimerTypes();
+
+    setTimerTypeInEdit(null);
+  }
+
   hooks.useCountdowns(timers, timerTypes);
 
   return (
     <TimerContext.Provider
       value={{
+        changeTimerType,
         createTimer,
         isCreatingTimer,
         isListingTimers,
         isListingTimerTypes,
         isUpdatingTimer,
+        isUpdatingTimerType,
         listTimers,
         listTimerTypes,
+        setTimerTypeInEdit,
         stopTimer,
         timers,
         timerTypes,
+        timerTypeInEdit,
+        updateTimerType,
       }}
     >
       {children}

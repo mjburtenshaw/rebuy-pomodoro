@@ -11,6 +11,21 @@ async function list(_, res) {
   }
 }
 
-const controller = { list };
+async function updateOne(req, res) {
+  try {
+    await db.timerType.update(req.body.timerTypeUpdates, {
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    res.sendStatus(httpStatus.OK);
+  } catch (error) {
+    console.error('💣 updating TimerType failed', error);
+    res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
+
+const controller = { list, updateOne };
 
 module.exports = { controller };

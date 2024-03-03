@@ -8,9 +8,19 @@ class TimerTypeService {
     this._baseUrl = baseUrl;
   }
 
-  public list = async (): Promise<TimerType[]> => {
-    const timerTypesOp = await axios.get(`${this._baseUrl}/timer-types/v1/`);
-    return timerTypesOp.data.timerTypes;
+  public list: () => Promise<TimerType[]> = async () => {
+    const listTimerTypesOp = await axios.get(
+      `${this._baseUrl}/timer-types/v1/`,
+    );
+    return listTimerTypesOp.data.timerTypes;
+  };
+
+  public updateOne: (timerType: TimerType) => Promise<void> = async (
+    timerType,
+  ) => {
+    await axios.put(`${this._baseUrl}/timer-types/v1/${timerType.id}`, {
+      timerTypeUpdates: { duration: timerType.duration },
+    });
   };
 }
 

@@ -10,4 +10,10 @@ router.get(
   controller.list,
 );
 
+router.put(
+  '/timer-types/v1/:id',
+  apiMiddlewares.logHttp('PUT /timer-types/v1/:id'),
+  controller.updateOne,
+);
+
 export { router };

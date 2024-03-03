@@ -1,5 +1,10 @@
 import { LogContext, logUtil } from '../../../../utils';
-import { TimerType, ListTimerTypesOp } from './dao.timerType.types';
+import {
+  TimerType,
+  ListTimerTypesOp,
+  TimerTypeUpdates,
+  UpdateTimerTypeOp,
+} from './dao.timerType.types';
 import axios from 'axios';
 
 class TimerTypeService {
@@ -34,6 +39,29 @@ class TimerTypeService {
     });
 
     return timerTypes;
+  }
+
+  public async updateOne(
+    timerTypeId: string,
+    timerTypeUpdates: TimerTypeUpdates,
+  ): Promise<string | undefined> {
+    if (!this._baseUrl || !this._logCtx) {
+      throw new Error(this._notReadyMessage);
+    }
+
+    logUtil.Logger.verbose(this._logCtx, '⏲️ updating TimerType...');
+
+    const updateTimerOp: UpdateTimerTypeOp = await axios.put(
+      `${this._baseUrl}/timer-types/v1/${timerTypeId}`,
+      { timerTypeUpdates },
+    );
+
+    const { error } = updateTimerOp.data;
+    if (error) {
+      return error;
+    }
+
+    logUtil.Logger.verbose(this._logCtx, '✅ updated TimerType');
   }
 }
 

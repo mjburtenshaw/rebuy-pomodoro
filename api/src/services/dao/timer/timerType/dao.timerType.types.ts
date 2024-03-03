@@ -14,3 +14,13 @@ export type ListTimerTypesOp = {
     timerTypes: TimerType[];
   };
 };
+
+export type UpdateTimerTypeOp = {
+  data: {
+    error: string;
+  };
+};
+
+export type TimerTypeUpdates = {
+  duration?: number;
+};
