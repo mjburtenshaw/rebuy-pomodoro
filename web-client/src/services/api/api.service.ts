@@ -25,8 +25,6 @@ class ApiService {
 
     this.timer.init(this._baseUrl);
     this.timerType.init(this._baseUrl);
-
-    console.log('⭐️ API service is ready');
   }
 }
 
