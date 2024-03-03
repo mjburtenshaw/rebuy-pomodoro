@@ -6,10 +6,11 @@ import {
 } from 'rebuy-pomodoro-ui';
 import { TimerTemplate } from '../templates';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
-import { TimerContext } from '../contexts/TimerContext';
+import { AppContext, TimerContext } from '../contexts';
 import { useContext, useEffect } from 'react';
 
 export function TimerPage() {
+  const { handleThemeChange, theme } = useContext(AppContext);
   const {
     createTimer,
     isListingTimers,
@@ -52,6 +53,16 @@ export function TimerPage() {
   return (
     <TimerTemplate.Page>
       <Grid>
+        <ButtonGroup
+          buttons={[
+            {
+              children: '',
+              iconOnly: 'appearance',
+              onClick: () =>
+                handleThemeChange(theme === 'light' ? 'dark' : 'light'),
+            },
+          ]}
+        />
         <TypographyGroup typographies={timerTypographies} />
         {timers.length && timerTypes.length ? (
           <TimerGroup
@@ -70,7 +81,8 @@ export function TimerPage() {
 
               return {
                 button: {
-                  children: 'STOP',
+                  children: '',
+                  iconOnly: 'trash',
                   onClick: () => stopTimer(timer),
                 },
                 label: timerType.label.replace(/_/g, ' '),
