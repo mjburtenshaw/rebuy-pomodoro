@@ -1,4 +1,5 @@
 import {
+  ButtonDataProps,
   ButtonGroup,
   TextFieldGroup,
   TimerGroup,
@@ -16,8 +17,10 @@ export function TimerPage() {
     changeTimerType,
     createTimer,
     isListingTimers,
+    isMuted,
     listTimers,
     listTimerTypes,
+    setIsMuted,
     setTimerTypeInEdit,
     stopTimer,
     timers,
@@ -55,19 +58,51 @@ export function TimerPage() {
     });
   }
 
+  const controlButtons: ButtonDataProps[] = [
+    {
+      children: '',
+      iconOnly: 'appearance',
+      onClick: () => handleThemeChange(theme === 'light' ? 'dark' : 'light'),
+    },
+  ];
+
+  const mutedIndicator: ButtonDataProps = {
+    children: '',
+    iconOnly: 'muted',
+    onClick: () => setIsMuted(false),
+  };
+
+  const unmutedIndicator: ButtonDataProps = {
+    children: '',
+    iconOnly: 'unmuted',
+    onClick: () => {
+      /* no-op */
+    },
+    disabled: true,
+  };
+
+  controlButtons.push(isMuted ? mutedIndicator : unmutedIndicator);
+
+  useEffect(() => {
+    const unmute = () => {
+      setIsMuted(false);
+    };
+
+    if (isMuted) {
+      document.addEventListener('click', unmute);
+    } else {
+      document.removeEventListener('click', unmute);
+    }
+
+    return () => {
+      document.removeEventListener('click', unmute);
+    };
+  }, [isMuted, setIsMuted]);
+
   return (
     <TimerTemplate.Page>
       <Grid>
-        <ButtonGroup
-          buttons={[
-            {
-              children: '',
-              iconOnly: 'appearance',
-              onClick: () =>
-                handleThemeChange(theme === 'light' ? 'dark' : 'light'),
-            },
-          ]}
-        />
+        <ButtonGroup buttons={controlButtons} />
         <TypographyGroup typographies={timerTypographies} />
         {timers.length && timerTypes.length ? (
           <TimerGroup

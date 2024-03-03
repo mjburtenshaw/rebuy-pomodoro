@@ -8,10 +8,12 @@ type TTimerContext = {
   isCreatingTimer: boolean;
   isListingTimers: boolean;
   isListingTimerTypes: boolean;
+  isMuted: boolean;
   isUpdatingTimer: boolean;
   isUpdatingTimerType: boolean;
   listTimers: () => Promise<void>;
   listTimerTypes: () => Promise<void>;
+  setIsMuted: (nextIsMuted: boolean) => void;
   setTimerTypeInEdit: (timerType: TimerType | null) => void;
   stopTimer: (timer: Timer) => Promise<void>;
   timers: Timer[];
@@ -26,10 +28,12 @@ export const TimerContext = createContext<TTimerContext>({
   isCreatingTimer: false,
   isListingTimers: false,
   isListingTimerTypes: false,
+  isMuted: true,
   isUpdatingTimer: false,
   isUpdatingTimerType: false,
   listTimers: asyncNoOp,
   listTimerTypes: asyncNoOp,
+  setIsMuted: noOp,
   setTimerTypeInEdit: noOp,
   stopTimer: asyncNoOp,
   timers: [],

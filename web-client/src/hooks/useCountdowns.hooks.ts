@@ -9,6 +9,7 @@ export function useCountdowns(
   timers: Timer[],
   timerTypes: TimerType[],
   setTimers: (callback: (timers: Timer[]) => Timer[]) => void,
+  isMuted: boolean,
 ) {
   const [countdowns, setCountdowns] = useState<Timeouts>({});
 
@@ -36,8 +37,21 @@ export function useCountdowns(
         return nextTimers;
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [countdowns, timers],
+    [countdowns, setTimers],
+  );
+
+  const fulfillTimer = useCallback(
+    (timer: Timer) => {
+      const sound = new Audio(
+        '../../public/sound-types/dd1d6231-7587-4f67-aa7c-1f0df1b8182f.mp3',
+      );
+      if (!isMuted) {
+        sound.play();
+      }
+      callUpdateTimer(timer.id, { endTime: new Date() }, 'auto_term');
+      removeCountdown(timer.id);
+    },
+    [callUpdateTimer, isMuted, removeCountdown],
   );
 
   const createCountdown = useCallback(
@@ -59,12 +73,7 @@ export function useCountdowns(
       const autoTerminateMs = (capSeconds - initialSeconds) * 1000;
 
       const countdown = setTimeout(() => {
-        const sound = new Audio(
-          '../../public/sound-types/dd1d6231-7587-4f67-aa7c-1f0df1b8182f.mp3',
-        );
-        sound.play();
-        callUpdateTimer(timer.id, { endTime: new Date() }, 'auto_term');
-        removeCountdown(timer.id);
+        fulfillTimer(timer);
       }, autoTerminateMs);
 
       const nextCountdowns = Object.fromEntries(Object.entries(countdowns));
@@ -78,8 +87,7 @@ export function useCountdowns(
         return nextCountdowns;
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [countdowns, timers, timerTypes],
+    [timerTypes, countdowns, fulfillTimer],
   );
 
   useEffect(() => {
@@ -93,6 +101,5 @@ export function useCountdowns(
     });
 
     timers.forEach(createCountdown);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timers]);
+  }, [countdowns, createCountdown, removeCountdown, timers]);
 }

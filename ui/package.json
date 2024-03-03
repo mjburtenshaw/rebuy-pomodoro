@@ -60,5 +60,5 @@
     "storybook": "storybook dev -p 6006"
   },
   "type": "module",
-  "version": "0.4.0"
+  "version": "0.5.0"
 }

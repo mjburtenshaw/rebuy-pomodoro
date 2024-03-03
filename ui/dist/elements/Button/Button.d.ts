@@ -6,7 +6,7 @@ export type ButtonDataProps = {
     onClick?: (event: React.MouseEvent) => void;
     skinny?: boolean;
     variant?: 'contained' | 'outlined' | 'text';
-    iconOnly?: 'appearance' | 'trash';
+    iconOnly?: 'appearance' | 'muted' | 'trash' | 'unmuted';
 };
 type ButtonStyleProps = {
     styles: SxProps<Theme>;

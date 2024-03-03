@@ -14,6 +14,7 @@ export function TimerContextProvider({ children }: TimerContextProviderProps) {
   const [timerTypeInEdit, setTimerTypeInEdit] = useState<TimerType | null>(
     null,
   );
+  const [isMuted, setIsMuted] = useState(true);
 
   const { call: callListTimers, isWaiting: isListingTimers } = hooks.useService(
     services.api.timer.list,
@@ -103,7 +104,7 @@ export function TimerContextProvider({ children }: TimerContextProviderProps) {
     setTimerTypeInEdit(null);
   }
 
-  hooks.useCountdowns(timers, timerTypes, setTimers);
+  hooks.useCountdowns(timers, timerTypes, setTimers, isMuted);
 
   return (
     <TimerContext.Provider
@@ -113,10 +114,12 @@ export function TimerContextProvider({ children }: TimerContextProviderProps) {
         isCreatingTimer,
         isListingTimers,
         isListingTimerTypes,
+        isMuted,
         isUpdatingTimer,
         isUpdatingTimerType,
         listTimers,
         listTimerTypes,
+        setIsMuted,
         setTimerTypeInEdit,
         stopTimer,
         timers,
