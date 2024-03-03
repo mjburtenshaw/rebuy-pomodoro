@@ -2,7 +2,7 @@
 
 The DAO for the rebuy-pomodoro database.
 
-![Static Badge](https://img.shields.io/badge/version-0.6.1-aa3288?labelColor=3754d5)
+![Static Badge](https://img.shields.io/badge/version-0.6.2-aa3288?labelColor=3754d5)
 
 ## Table of Contents
 

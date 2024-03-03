@@ -52,20 +52,19 @@ async function updateOne(req, res) {
       });
     }
 
-    const timerUpdates = {
-      end_time: req.body.timerUpdates.endTime,
-    };
-    await db.timer.update(timerUpdates, {
+    await db.timer.update(req.body.timerUpdates, {
       where: {
         id: req.params.id,
       },
     });
+
     await db.timerLog.create({
       eventType: req.body.eventType,
       timerId: req.params.id,
       version: '1',
     });
-    res.status(httpStatus.CREATED).json({ timer });
+
+    res.sendStatus(httpStatus.OK);
   } catch (error) {
     console.error('💣 creating timer failed', error);
     res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
