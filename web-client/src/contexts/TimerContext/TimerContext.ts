@@ -3,8 +3,10 @@ import { Timer, TimerType } from '../../services';
 import { asyncNoOp } from '../../global.utils';
 
 type TTimerContext = {
-  isListTimersWaiting: boolean;
-  isListTimerTypesWaiting: boolean;
+  createTimer: (timerTypeId: string) => Promise<void>;
+  isCreatingTimer: boolean;
+  isListingTimers: boolean;
+  isListingTimerTypes: boolean;
   listTimers: () => Promise<void>;
   listTimerTypes: () => Promise<void>;
   timers: Timer[];
@@ -12,8 +14,10 @@ type TTimerContext = {
 };
 
 export const TimerContext = createContext<TTimerContext>({
-  isListTimersWaiting: false,
-  isListTimerTypesWaiting: false,
+  createTimer: asyncNoOp,
+  isCreatingTimer: false,
+  isListingTimers: false,
+  isListingTimerTypes: false,
   listTimers: asyncNoOp,
   listTimerTypes: asyncNoOp,
   timers: [],

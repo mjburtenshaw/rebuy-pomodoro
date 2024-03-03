@@ -1,4 +1,4 @@
-import { Timer } from '.';
+import { StagedTimer, Timer } from '.';
 import axios from 'axios';
 
 class TimerService {
@@ -9,8 +9,15 @@ class TimerService {
   }
 
   public list = async (): Promise<Timer[]> => {
-    const timersOp = await axios.get(`${this._baseUrl}/timers/v1/`);
-    return timersOp.data.timers;
+    const listTimersOp = await axios.get(`${this._baseUrl}/timers/v1/`);
+    return listTimersOp.data.timers;
+  };
+
+  public create = async (stagedTimer: StagedTimer): Promise<Timer> => {
+    const createTimersOp = await axios.post(`${this._baseUrl}/timers/v1/`, {
+      stagedTimer,
+    });
+    return createTimersOp.data.timer;
   };
 }
 

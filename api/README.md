@@ -2,7 +2,7 @@
 
 The API for the rebuy-pomodoro application.
 
-![Static Badge](https://img.shields.io/badge/version-0.1.0-aa3288?labelColor=3754d5)
+![Static Badge](https://img.shields.io/badge/version-0.2.0-aa3288?labelColor=3754d5)
 
 ## Table of Contents
 

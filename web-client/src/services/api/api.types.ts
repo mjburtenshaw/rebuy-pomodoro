@@ -1,10 +1,16 @@
+export type StagedTimer = {
+  startTime: Date;
+  taskId: string | null;
+  timerTypeId: string;
+};
+
 export type Timer = {
   createdAt: Date;
   deletedAt: Date | null;
   endTime: Date | null;
   id: string;
   startTime: Date;
-  taskId: string;
+  taskId: string | null;
   timerTypeId: string;
   updatedAt: Date;
   version: string;
@@ -20,4 +26,3 @@ export type TimerType = {
   updatedAt: Date;
   version: string;
 };
-

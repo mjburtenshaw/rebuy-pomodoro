@@ -10,7 +10,8 @@ import { useContext, useEffect } from 'react';
 
 export function TimerPage() {
   const {
-    isListTimersWaiting,
+    createTimer,
+    isListingTimers,
     listTimers,
     listTimerTypes,
     timers,
@@ -32,14 +33,14 @@ export function TimerPage() {
     },
   ];
 
-  if (isListTimersWaiting) {
+  if (isListingTimers) {
     timerTypographies.push({
       children: 'Getting Timers...',
       variant: 'body1',
     });
   }
 
-  if (!timers.length && !isListTimersWaiting) {
+  if (!timers.length && !isListingTimers) {
     timerTypographies.push({
       children: 'No timers to display.',
       variant: 'body1',
@@ -55,7 +56,8 @@ export function TimerPage() {
           label="Start a new timer:"
           buttons={timerTypes.map((timerType) => ({
             children: timerType.label.replace(/_/g, ' '),
-            variant: 'outlined',
+            variant: 'outlined' as const,
+            onClick: () => createTimer(timerType.id),
           }))}
         />
       </Grid>

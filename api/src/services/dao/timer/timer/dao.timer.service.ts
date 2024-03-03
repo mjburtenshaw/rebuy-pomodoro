@@ -1,5 +1,10 @@
 import { LogContext, logUtil } from '../../../../utils';
-import { Timer, ListTimersOp } from './dao.timer.types';
+import {
+  CreateTimerOp,
+  ListTimersOp,
+  StagedTimer,
+  Timer,
+} from './dao.timer.types';
 import axios from 'axios';
 
 class TimerService {
@@ -44,6 +49,37 @@ class TimerService {
       updatedAt: timer.updated_at,
       version: timer.version,
     }));
+  }
+
+  public async create(stagedTimer: StagedTimer): Promise<Timer> {
+    if (!this._baseUrl || !this._logCtx) {
+      throw new Error(this._notReadyMessage);
+    }
+
+    logUtil.Logger.verbose(this._logCtx, '⏲️ creating Timer...');
+
+    const createTimerOp: CreateTimerOp = await axios.post(
+      `${this._baseUrl}/timers/v1/`,
+      { stagedTimer },
+    );
+
+    const { timer } = createTimerOp.data;
+
+    logUtil.Logger.verbose(this._logCtx, '✅ created Timer', {
+      timers: JSON.stringify(timer),
+    });
+
+    return {
+      createdAt: timer.created_at,
+      deletedAt: timer.deleted_at,
+      endTime: timer.end_time,
+      id: timer.id,
+      startTime: timer.start_time,
+      taskId: timer.task_id,
+      timerTypeId: timer.timer_type_id,
+      updatedAt: timer.updated_at,
+      version: timer.version,
+    };
   }
 }
 

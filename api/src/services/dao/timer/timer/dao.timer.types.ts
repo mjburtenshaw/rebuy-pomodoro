@@ -1,3 +1,19 @@
+export type CreateTimerOp = {
+  data: {
+    timer: {
+      created_at: Date;
+      deleted_at: Date | null;
+      end_time: Date | null;
+      id: string;
+      start_time: Date;
+      task_id: string | null;
+      timer_type_id: string;
+      updated_at: Date;
+      version: string;
+    };
+  };
+};
+
 export type ListTimersOp = {
   data: {
     timers: Array<{
@@ -6,12 +22,18 @@ export type ListTimersOp = {
       end_time: Date | null;
       id: string;
       start_time: Date;
-      task_id: string;
+      task_id: string | null;
       timer_type_id: string;
       updated_at: Date;
       version: string;
     }>;
   };
+};
+
+export type StagedTimer = {
+  startTime: Date;
+  taskId: string | null;
+  timerTypeId: string;
 };
 
 export type Timer = {
@@ -20,7 +42,7 @@ export type Timer = {
   endTime: Date | null;
   id: string;
   startTime: Date;
-  taskId: string;
+  taskId: string | null;
   timerTypeId: string;
   updatedAt: Date;
   version: string;
