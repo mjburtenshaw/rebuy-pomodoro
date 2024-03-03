@@ -45,8 +45,15 @@ async function create(req, res) {
 
 async function updateOne(req, res) {
   try {
+    const validEventTypes = ['user_term', 'auto_term'];
+    if (!validEventTypes.includes(req.body.eventType)) {
+      return res.sendStatus(httpStatus.BAD_REQUEST).json({
+        error: `eventType is invalid, must be one of ${validEventTypes.join(', ')}`,
+      });
+    }
+
     const timerUpdates = {
-      end_time: req.body.endTime,
+      end_time: req.body.timerUpdates.endTime,
     };
     await db.timer.update(timerUpdates, {
       where: {
