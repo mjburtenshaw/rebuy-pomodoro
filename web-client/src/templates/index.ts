@@ -1,1 +1,1 @@
-export * as HomeTemplate from './Home';
+export * as TimerTemplate from './Timer';

@@ -33,16 +33,7 @@ class TimerTypeService {
       timers: JSON.stringify(timerTypes),
     });
 
-    return timerTypes.map((timerType) => ({
-      createdAt: timerType.created_at,
-      deletedAt: timerType.deleted_at,
-      duration: timerType.duration,
-      id: timerType.id,
-      label: timerType.label,
-      soundTypeId: timerType.sound_type_id,
-      updatedAt: timerType.updated_at,
-      version: timerType.version,
-    }));
+    return timerTypes;
   }
 }
 

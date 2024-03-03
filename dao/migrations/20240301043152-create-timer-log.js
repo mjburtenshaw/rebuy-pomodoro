@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('timer_logs', {
+    await queryInterface.createTable('timer_log', {
       id: {
         allowNull: false,
         defaultValue: Sequelize.UUIDV4,
@@ -35,6 +35,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('timer_logs');
+    await queryInterface.dropTable('timer_log');
   },
 };

@@ -5,24 +5,24 @@ export type StagedTimer = {
 };
 
 export type Timer = {
-  createdAt: Date;
-  deletedAt: Date | null;
-  endTime: Date | null;
+  createdAt: string;
+  deletedAt: string | null;
+  endTime: string | null;
   id: string;
-  startTime: Date;
+  startTime: string;
   taskId: string | null;
   timerTypeId: string;
-  updatedAt: Date;
+  updatedAt: string;
   version: string;
 };
 
 export type TimerType = {
-  createdAt: Date;
-  deletedAt: Date | null;
+  createdAt: string;
+  deletedAt: string | null;
   duration: number;
   id: string;
   label: string;
   soundTypeId: string;
-  updatedAt: Date;
+  updatedAt: string;
   version: string;
 };

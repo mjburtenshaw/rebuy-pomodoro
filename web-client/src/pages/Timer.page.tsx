@@ -1,9 +1,10 @@
 import {
   ButtonGroup,
+  TimerGroup,
   TypographyDataProps,
   TypographyGroup,
 } from 'rebuy-pomodoro-ui';
-import { HomeTemplate } from '../templates';
+import { TimerTemplate } from '../templates';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import { TimerContext } from '../contexts/TimerContext';
 import { useContext, useEffect } from 'react';
@@ -48,9 +49,47 @@ export function TimerPage() {
   }
 
   return (
-    <HomeTemplate.Page>
+    <TimerTemplate.Page>
       <Grid>
         <TypographyGroup typographies={timerTypographies} />
+        {timers.length && timerTypes.length ? (
+          <TimerGroup
+            timers={timers.map((timer) => {
+              const timerType = timerTypes.find(
+                (timerType) => timerType.id === timer.timerTypeId,
+              );
+              if (!timerType) {
+                throw new Error('💣 timerType not found');
+              }
+
+              const capSeconds = timerType.duration / 1000;
+              const initialSeconds = Math.floor(
+                (Date.now() - Date.parse(timer.startTime)) / 1000,
+              );
+
+              return {
+                button: {
+                  children: 'STOP',
+                },
+                label: timerType.label,
+                linearProgress: {
+                  hookProps: {
+                    cap: capSeconds,
+                    increment: 1,
+                    initial: initialSeconds,
+                    interval: 1000,
+                  },
+                  isCountdown: true,
+                  progressLabelFormatter: (secondsRemaining: number) => {
+                    const minutesRemaining = Math.floor(secondsRemaining / 60);
+                    const onlySecondsRemaining = secondsRemaining % 60;
+                    return `${minutesRemaining}m${onlySecondsRemaining}s`;
+                  },
+                },
+              };
+            })}
+          />
+        ) : null}
         <ButtonGroup
           direction="column"
           label="Start a new timer:"
@@ -61,6 +100,6 @@ export function TimerPage() {
           }))}
         />
       </Grid>
-    </HomeTemplate.Page>
+    </TimerTemplate.Page>
   );
 }

@@ -29,7 +29,7 @@ class TimerService {
     logUtil.Logger.verbose(this._logCtx, '⏲️ listing Timers...');
 
     const listTimersOp: ListTimersOp = await axios.get(
-      `${this._baseUrl}/timers/v1/`,
+      `${this._baseUrl}/timers/v1?active=true`,
     );
 
     const { timers } = listTimersOp.data;
@@ -38,17 +38,7 @@ class TimerService {
       timers: JSON.stringify(timers),
     });
 
-    return timers.map((timer) => ({
-      createdAt: timer.created_at,
-      deletedAt: timer.deleted_at,
-      endTime: timer.end_time,
-      id: timer.id,
-      startTime: timer.start_time,
-      taskId: timer.task_id,
-      timerTypeId: timer.timer_type_id,
-      updatedAt: timer.updated_at,
-      version: timer.version,
-    }));
+    return timers;
   }
 
   public async create(stagedTimer: StagedTimer): Promise<Timer> {
@@ -69,17 +59,7 @@ class TimerService {
       timers: JSON.stringify(timer),
     });
 
-    return {
-      createdAt: timer.created_at,
-      deletedAt: timer.deleted_at,
-      endTime: timer.end_time,
-      id: timer.id,
-      startTime: timer.start_time,
-      taskId: timer.task_id,
-      timerTypeId: timer.timer_type_id,
-      updatedAt: timer.updated_at,
-      version: timer.version,
-    };
+    return timer;
   }
 }
 

@@ -1,5 +1,6 @@
 export type * from './elements';
 export { ButtonGroup } from './modules/ButtonGroup.module';
+export { TimerGroup } from './modules/TimerGroup.module';
 export { TypographyGroup } from './modules/TypographyGroup.module';
 export type * from './modules';
 export { lightTheme, darkTheme } from './themes/app.theme';

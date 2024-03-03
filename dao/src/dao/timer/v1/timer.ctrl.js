@@ -1,10 +1,19 @@
+const { util } = require('./timer.util');
 const db = require('../../../../models');
 const httpStatus = require('http-status');
 
-async function list(_, res) {
+async function list(req, res) {
   try {
     const timers = await db.timer.findAll();
-    res.status(httpStatus.OK).json({ timers });
+    const timerTypes = await db.timerType.findAll();
+    const terminations = timers.map((timer) =>
+      util.autoTerminate(timer, timerTypes),
+    );
+    await Promise.all(terminations);
+    const activeTimers = timers.filter((timer) => !timer.endTime);
+    res
+      .status(httpStatus.OK)
+      .json({ timers: req.query.active ? activeTimers : timers });
   } catch (error) {
     console.error('💣 listing timers failed', error);
     res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
@@ -22,6 +31,11 @@ async function create(req, res) {
       version: '1',
     };
     const timer = await db.timer.create(stagedTimer);
+    await db.timerLog.create({
+      eventType: 'start',
+      timerId: timer.id,
+      version: '1',
+    });
     res.status(httpStatus.CREATED).json({ timer });
   } catch (error) {
     console.error('💣 creating timer failed', error);
