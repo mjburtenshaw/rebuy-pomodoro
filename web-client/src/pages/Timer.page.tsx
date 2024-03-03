@@ -71,7 +71,7 @@ export function TimerPage() {
                 button: {
                   children: 'STOP',
                 },
-                label: timerType.label,
+                label: timerType.label.replace(/_/g, ' '),
                 linearProgress: {
                   hookProps: {
                     cap: capSeconds,
