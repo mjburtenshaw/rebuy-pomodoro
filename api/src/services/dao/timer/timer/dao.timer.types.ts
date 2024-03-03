@@ -22,8 +22,18 @@ export type ListTimersOp = {
   };
 };
 
+export type UpdateTimerOp = {
+  data: {
+    error: string;
+  };
+};
+
 export type StagedTimer = {
   startTime: Date;
   taskId: string | null;
   timerTypeId: string;
+};
+
+export type TimerUpdates = {
+  endTime: Date;
 };

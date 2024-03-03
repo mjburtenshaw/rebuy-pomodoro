@@ -29,7 +29,29 @@ const create: express.Handler = async (req, res) => {
   }
 };
 
+const updateOne: express.Handler = async (req, res) => {
+  const ctx = new logUtil.Context('timerController:updateOne', {
+    parentCtx: res.locals.ctx,
+  });
+  try {
+    const error = await services.dao.timer.timer.updateOne(
+      req.params.id,
+      req.body.timerUpdates,
+      req.body.eventType,
+    );
+    if (error) {
+      return res.status(status.BAD_REQUEST).json({ error });
+    }
+
+    res.status(status.OK);
+  } catch (error: any) {
+    logUtil.Logger.error(ctx, `timer error: ${error.message}`, error);
+    res.sendStatus(status.INTERNAL_SERVER_ERROR);
+  }
+};
+
 export const controller = {
   create,
   list,
+  updateOne,
 };

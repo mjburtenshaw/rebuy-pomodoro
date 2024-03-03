@@ -4,6 +4,8 @@ import {
   ListTimersOp,
   StagedTimer,
   Timer,
+  TimerUpdates,
+  UpdateTimerOp,
 } from './dao.timer.types';
 import axios from 'axios';
 
@@ -60,6 +62,30 @@ class TimerService {
     });
 
     return timer;
+  }
+
+  public async updateOne(
+    timerId: string,
+    timerUpdates: TimerUpdates,
+    eventType: string,
+  ): Promise<string | undefined> {
+    if (!this._baseUrl || !this._logCtx) {
+      throw new Error(this._notReadyMessage);
+    }
+
+    logUtil.Logger.verbose(this._logCtx, '⏲️ updating Timer...');
+
+    const createTimerOp: UpdateTimerOp = await axios.put(
+      `${this._baseUrl}/timers/v1/${timerId}`,
+      { eventType, timerUpdates },
+    );
+
+    const { error } = createTimerOp.data;
+    if (error) {
+      return error;
+    }
+
+    logUtil.Logger.verbose(this._logCtx, '✅ updated Timer');
   }
 }
 
