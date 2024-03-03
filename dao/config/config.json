@@ -1,9 +1,0 @@
-{
-  "development": {
-    "username": "postgres",
-    "password": "128be189-ee2e-4b51-9fcc-ed4df6c55f2e",
-    "database": "pomo",
-    "host": "db",
-    "dialect": "postgres"
-  }
-}
