@@ -57,6 +57,19 @@ export function TimerContextProvider({ children }: TimerContextProviderProps) {
     }
   }
 
+  const { call: callUpdateTimer, isWaiting: isUpdatingTimer } =
+    hooks.useService(services.api.timer.updateOne, {
+      success: 'Timer updated!',
+      failure: `Couldn't update timer. Please contact Support at ${SUPPORT_EMAIL}.`,
+    });
+
+  async function stopTimer(timer: Timer) {
+    await callUpdateTimer(timer.id, { endTime: new Date() }, 'user_term');
+    await listTimers();
+  }
+
+  hooks.useCountdowns(timers, timerTypes);
+
   return (
     <TimerContext.Provider
       value={{
@@ -64,8 +77,10 @@ export function TimerContextProvider({ children }: TimerContextProviderProps) {
         isCreatingTimer,
         isListingTimers,
         isListingTimerTypes,
+        isUpdatingTimer,
         listTimers,
         listTimerTypes,
+        stopTimer,
         timers,
         timerTypes,
       }}

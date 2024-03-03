@@ -15,6 +15,7 @@ export function TimerPage() {
     isListingTimers,
     listTimers,
     listTimerTypes,
+    stopTimer,
     timers,
     timerTypes,
   } = useContext(TimerContext);
@@ -70,6 +71,7 @@ export function TimerPage() {
               return {
                 button: {
                   children: 'STOP',
+                  onClick: () => stopTimer(timer),
                 },
                 label: timerType.label.replace(/_/g, ' '),
                 linearProgress: {

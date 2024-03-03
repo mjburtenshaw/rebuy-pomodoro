@@ -1,4 +1,4 @@
-import { StagedTimer, Timer } from '.';
+import { StagedTimer, Timer, TimerUpdates } from '.';
 import axios from 'axios';
 
 class TimerService {
@@ -18,6 +18,22 @@ class TimerService {
       stagedTimer,
     });
     return createTimersOp.data.timer;
+  };
+
+  public updateOne = async (
+    timerId: string,
+    timerUpdates: TimerUpdates,
+    eventType: string,
+  ): Promise<string | null> => {
+    const updateTimerOp = await axios.put(
+      `${this._baseUrl}/timers/v1/${timerId}`,
+      {
+        eventType,
+        timerUpdates,
+      },
+    );
+
+    return updateTimerOp.data.error || null;
   };
 }
 

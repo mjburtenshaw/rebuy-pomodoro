@@ -26,3 +26,7 @@ export type TimerType = {
   updatedAt: string;
   version: string;
 };
+
+export type TimerUpdates = {
+  endTime?: Date;
+};
