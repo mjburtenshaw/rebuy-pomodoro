@@ -75,12 +75,12 @@ class TimerService {
 
     logUtil.Logger.verbose(this._logCtx, '⏲️ updating Timer...');
 
-    const createTimerOp: UpdateTimerOp = await axios.put(
+    const updateTimerOp: UpdateTimerOp = await axios.put(
       `${this._baseUrl}/timers/v1/${timerId}`,
       { eventType, timerUpdates },
     );
 
-    const { error } = createTimerOp.data;
+    const { error } = updateTimerOp.data;
     if (error) {
       return error;
     }

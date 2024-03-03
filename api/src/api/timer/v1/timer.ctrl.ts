@@ -43,7 +43,7 @@ const updateOne: express.Handler = async (req, res) => {
       return res.status(status.BAD_REQUEST).json({ error });
     }
 
-    res.status(status.OK);
+    res.sendStatus(status.OK);
   } catch (error: any) {
     logUtil.Logger.error(ctx, `timer error: ${error.message}`, error);
     res.sendStatus(status.INTERNAL_SERVER_ERROR);

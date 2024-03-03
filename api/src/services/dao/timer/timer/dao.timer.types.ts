@@ -35,5 +35,5 @@ export type StagedTimer = {
 };
 
 export type TimerUpdates = {
-  endTime: Date;
+  endTime?: Date;
 };
