@@ -2,7 +2,11 @@
 
 echo "Starting Web Client..."
 
-cd web-client
+cd ui
+
+npm install
+
+cd ../web-client
 
 npm install
 
