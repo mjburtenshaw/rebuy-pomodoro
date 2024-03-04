@@ -2,12 +2,12 @@
 
 A web-based Pomodoro timer.
 
-![Static Badge](https://img.shields.io/badge/version-3.0.0-aa3288?labelColor=3754d5)
+![Static Badge](https://img.shields.io/badge/version-3.1.0-aa3288?labelColor=3754d5)
 
 ## Quickstart
 
 ```shell
-npm run setup && npm run dev
+npm run quickstart
 ```
 
 ## Table of Contents
@@ -20,6 +20,7 @@ npm run setup && npm run dev
 - [Platforms](#platforms)
 - [Philosophy](#philosophy)
   - [Architecture](#architecture)
+- [Known Issues](#known-issues)
 
 ## People
 
@@ -94,3 +95,7 @@ biz > ops > dev
 biz ≹ user
 
 More on that philosophy in [_Code is run more than read_](https://olano.dev/2023-11-30-code-is-run-more-than-read/) by Facundo Olano.
+
+## Known Issues
+
+There is an issue with repainting timer progress when previous ones clear. It seems to be an off by one error, but the data says it's correct.

@@ -22,7 +22,8 @@
   "scripts": {
     "dev": "docker compose up --build",
     "format": "npx prettier --config=.prettier/.prettier.config.json --ignore-path=.gitignore --ignore-path=.prettier/.prettierignore . --write",
+    "quickstart": "npm run setup && npm run dev",
     "setup": "./scripts/setup.sh"
   },
-  "version": "3.0.0"
+  "version": "3.1.0"
 }
