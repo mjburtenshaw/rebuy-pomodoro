@@ -43,7 +43,7 @@ export function useCountdowns(
   const fulfillTimer = useCallback(
     (timer: Timer) => {
       const sound = new Audio(
-        '../../public/sound-types/dd1d6231-7587-4f67-aa7c-1f0df1b8182f.mp3',
+        'sound-types/dd1d6231-7587-4f67-aa7c-1f0df1b8182f.mp3',
       );
       if (!isMuted) {
         sound.play();

@@ -98,4 +98,5 @@ More on that philosophy in [_Code is run more than read_](https://olano.dev/2023
 
 ## Known Issues
 
-There is an issue with repainting timer progress when previous ones clear. It seems to be an off by one error, but the data says it's correct.
+- Playing sounds does not work in WebKit based browsers, e.g., Safari. It should work on browsers running Chromium, e.g., Chrome, Firefox, etc.
+- There is an issue with repainting timer progress when previous ones clear. It seems to be an off by one error, but the data says it's correct.
