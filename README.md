@@ -14,6 +14,7 @@ npm run quickstart
 
 - [People](#principals)
 - [Policies](#policies)
+  - [Documentation](#documentation)
   - [Version Control](#version-control)
 - [Procedures](#procedures)
   - [Usage](#usage)
