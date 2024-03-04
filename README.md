@@ -2,9 +2,13 @@
 
 A web-based Pomodoro timer.
 
-Skip to [Usage](#usage) to get going.
+![Static Badge](https://img.shields.io/badge/version-3.0.0-aa3288?labelColor=3754d5)
 
-![Static Badge](https://img.shields.io/badge/version-2.1.0-aa3288?labelColor=3754d5)
+## Quickstart
+
+```shell
+npm run setup && npm run dev
+```
 
 ## Table of Contents
 
@@ -47,7 +51,7 @@ Skip to [Usage](#usage) to get going.
 npm run setup
 ```
 
-3. Change environment variables as desired in the newly created `db/.env` and `api/.env` files.
+3. (optional) Change environment variables as desired in the newly created `.rebuy-pomodoro.db.env`, `web-client/.env`, `dao/config/config.json`, and `api/.env` files.
 
 ### Usage
 

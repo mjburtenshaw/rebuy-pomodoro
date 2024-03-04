@@ -3,5 +3,6 @@
 logs
 node_modules
 tmp
+dao/config/config.json
 
 !*sample.env
